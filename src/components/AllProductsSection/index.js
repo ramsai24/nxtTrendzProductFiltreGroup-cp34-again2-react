@@ -109,23 +109,29 @@ class AllProductsSection extends Component {
         imageUrl: product.image_url,
         rating: product.rating,
       }))
-      if (updatedData.length === 0) {
-        this.setState({
-          //   productsList: updatedData,
-          // isLoading: false,
+      this.setState({
+        productsList: updatedData,
+        // isLoading: false,
+        apiStatus: 'SUCCESS',
+        noProduct: false,
+      })
+      //   if (updatedData.length === 0) {
+      //     this.setState({
+      //       //   productsList: updatedData,
+      //       // isLoading: false,
 
-          apiStatus: 'noProduct',
-          noProduct: true,
-          productsList: updatedData,
-        })
-      } else {
-        this.setState({
-          productsList: updatedData,
-          // isLoading: false,
-          apiStatus: 'SUCCESS',
-          noProduct: false,
-        })
-      }
+      //       apiStatus: 'noProduct',
+      //       noProduct: true,
+      //       productsList: updatedData,
+      //     })
+      //   } else {
+      //     this.setState({
+      //       productsList: updatedData,
+      //       // isLoading: false,
+      //       apiStatus: 'SUCCESS',
+      //       noProduct: false,
+      //     })
+      //   }
     } else {
       this.setState({apiStatus: 'FAILURE'})
     }
@@ -213,7 +219,7 @@ class AllProductsSection extends Component {
         alt="no products"
       />
       <h1>No Products Found</h1>
-      <p>We could not find any products.Try other filters</p>
+      <p>We could not find any products.Try other filters.</p>
     </div>
   )
 
@@ -221,7 +227,7 @@ class AllProductsSection extends Component {
     const {apiStatus, productsList, noProduct} = this.state
     // console.log(apiStatus, noProduct)
     console.log(productsList)
-    console.log(productsList.length === 0)
+    console.log(productsList.length === [].length)
 
     switch (apiStatus) {
       case 'INPROGRESS':
@@ -236,7 +242,9 @@ class AllProductsSection extends Component {
           <div className="rendering-container">
             {this.renderFilterView()}
 
-            {this.renderProductsList()}
+            {productsList.length === [].length
+              ? this.renderNoProductView()
+              : this.renderProductsList()}
           </div>
         )
       case 'FAILURE':
