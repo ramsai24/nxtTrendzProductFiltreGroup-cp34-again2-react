@@ -113,8 +113,10 @@ class AllProductsSection extends Component {
         this.setState({
           //   productsList: updatedData,
           // isLoading: false,
-          apiStatus: 'SUCCESS',
+
+          apiStatus: 'noProduct',
           noProduct: true,
+          productsList: updatedData,
         })
       } else {
         this.setState({
@@ -216,8 +218,10 @@ class AllProductsSection extends Component {
   )
 
   render() {
-    const {apiStatus, noProduct} = this.state
-    console.log(apiStatus, noProduct)
+    const {apiStatus, productsList, noProduct} = this.state
+    // console.log(apiStatus, noProduct)
+    console.log(productsList)
+    console.log(productsList.length === 0)
 
     switch (apiStatus) {
       case 'INPROGRESS':
@@ -231,7 +235,8 @@ class AllProductsSection extends Component {
         return (
           <div className="rendering-container">
             {this.renderFilterView()}
-            {noProduct ? this.renderNoProductView() : this.renderProductsList()}
+
+            {this.renderProductsList()}
           </div>
         )
       case 'FAILURE':
@@ -239,6 +244,13 @@ class AllProductsSection extends Component {
           <div className="rendering-container">
             {this.renderFilterView()}
             {this.renderFailureView()}
+          </div>
+        )
+      case 'noProduct':
+        return (
+          <div className="rendering-container">
+            {this.renderFilterView()}
+            {this.renderNoProductView()}
           </div>
         )
       default:
