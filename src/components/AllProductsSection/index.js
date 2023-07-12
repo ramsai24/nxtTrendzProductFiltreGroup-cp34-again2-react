@@ -149,7 +149,7 @@ class AllProductsSection extends Component {
   }
 
   renderProductsList = () => {
-    const {productsList, activeOptionId} = this.state
+    const {productsList, activeOptionId, searchInput} = this.state
 
     // TODO: Add No Products View
     return (
@@ -195,22 +195,28 @@ class AllProductsSection extends Component {
       this.setState({categoryID: id[0]}, this.getProducts)
     } else if (id.includes('rating')) {
       this.setState({ratingID: id[0]}, this.getProducts)
+    } else if (id.includes('enter')) {
+      this.getProducts()
     }
   }
 
-  renderFilterView = () => (
-    <div className="all-products-section">
-      {/* TODO: Update the below element */}
-      <FiltersGroup
-        ratingsList={ratingsList}
-        categoryList={categoryOptions}
-        onFilter={this.onFilter}
-        onClear={this.onClear}
-      />
+  renderFilterView = () => {
+    const {searchInput} = this.state
+    return (
+      <div className="all-products-section">
+        {/* TODO: Update the below element */}
+        <FiltersGroup
+          searchInput={searchInput}
+          ratingsList={ratingsList}
+          categoryList={categoryOptions}
+          onFilter={this.onFilter}
+          onClear={this.onClear}
+        />
 
-      {/* {isLoading ? this.renderLoader() : this.renderProductsList()} */}
-    </div>
-  )
+        {/* {isLoading ? this.renderLoader() : this.renderProductsList()} */}
+      </div>
+    )
+  }
 
   renderNoProductView = () => (
     <div>

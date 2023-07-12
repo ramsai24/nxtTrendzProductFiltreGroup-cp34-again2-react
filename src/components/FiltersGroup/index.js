@@ -3,15 +3,19 @@ import {CgSearch} from 'react-icons/cg'
 import './index.css'
 
 const FiltersGroup = props => {
-  const {categoryList, ratingsList, onFilter, onClear} = props
+  const {categoryList, ratingsList, onFilter, searchInput, onClear} = props
   //   console.log(categoryList, ratingsList)
   let inputEl
   const keyDown = event => {
     // console.log(event.key)
     if (event.key === 'Enter') {
-      onFilter([event.target.value, 'searchInput'])
+      onFilter(['enter'])
     }
     inputEl = ''
+  }
+
+  const onchange = event => {
+    onFilter([event.target.value, 'searchInput'])
   }
 
   const clear = () => {
@@ -23,9 +27,10 @@ const FiltersGroup = props => {
       <div>
         <input
           type="search"
-          value={inputEl}
+          value={searchInput}
           placeholder="Search"
           onKeyDown={keyDown}
+          onChange={onchange}
         />
         <CgSearch />
       </div>
