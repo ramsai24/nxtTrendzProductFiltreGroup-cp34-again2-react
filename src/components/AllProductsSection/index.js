@@ -219,7 +219,7 @@ class AllProductsSection extends Component {
         alt="no products"
       />
       <h1>No Products Found</h1>
-      <p>We could not find any products.Try other filters.</p>
+      <p>We could not find any products. Try other filters.</p>
     </div>
   )
 
