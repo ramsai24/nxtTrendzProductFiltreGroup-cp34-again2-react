@@ -254,13 +254,13 @@ class AllProductsSection extends Component {
             {this.renderFailureView()}
           </div>
         )
-      case 'noProduct':
-        return (
-          <div className="rendering-container">
-            {this.renderFilterView()}
-            {this.renderNoProductView()}
-          </div>
-        )
+      //   case 'noProduct':
+      //     return (
+      //       <div className="rendering-container">
+      //         {this.renderFilterView()}
+      //         {this.renderNoProductView()}
+      //       </div>
+      //     )
       default:
         return null
     }
